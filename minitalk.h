@@ -19,8 +19,6 @@ typedef struct s_result
 {
 	char	c;
 	int		used;
-}			result;
-// function prototypes here
-
+}			t_result;
 
 #endif

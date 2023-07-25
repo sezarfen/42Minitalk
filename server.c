@@ -1,48 +1,38 @@
 #include "minitalk.h"
-// server
-/*
 
-	The server must be started first. After its launch, it has to print its PID.
+t_result g_handle;
 
-	The communication between your client and your server has to be done only using
-	UNIX signals.
-
-*/
-result handle;
-
-void	handle_siguser1()
+void	handle_siguser1(void)
 {
-	if (handle.c > 127)
-		handle.c = 0;
-	handle.c <<= 1;
-	handle.c += 1;
-	handle.used++;
-	if (handle.used == 8)
+	g_handle.c <<= 1;
+	g_handle.c += 1;
+	g_handle.used++;
+	if (g_handle.used == 8)
 	{
-		ft_printf("%c", handle.c);
-		handle.used = 0;
+		ft_printf("%c", g_handle.c);
+		g_handle.used = 0;
+		g_handle.c = 0;
 	}
 }
 
-void	handle_siguser2()
+void	handle_siguser2(void)
 {
-	if (handle.c > 127)
-		handle.c = 0;
-	handle.c <<= 1;
-	handle.used++;
-	if (handle.used == 8)
+	g_handle.c <<= 1;
+	g_handle.used++;
+	if (g_handle.used == 8) // 8 will be read UNICODE chars
 	{
-		ft_printf("%c", handle.c);
-		handle.used = 0;
+		ft_printf("%c", g_handle.c);
+		g_handle.used = 0;
+		g_handle.c = 0;
 	}
 }
 
-int main(void)
+int	main(void)
 {
 	ft_printf("Server's PID = %d\n", getpid());
 	ft_printf("Waiting input from client...\n");
-	handle.c = 0;
-	handle.used = 0;
+	g_handle.c = 0;
+	g_handle.used = 0;
 	signal(SIGUSR1, handle_siguser1);
 	signal(SIGUSR2, handle_siguser2);
 	while (1)

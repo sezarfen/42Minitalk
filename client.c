@@ -1,22 +1,15 @@
 #include "minitalk.h"
-// client
 
-/*
-	The client takes two parameters:
-		◦ The server PID.
-		◦ The string to send  // ac == 3
-*/
 char	a;
 
 void	send_signal(int pid)
 {
 	int	i;
-	
-	// 128 -> 1000 0000 & .... -> 128 ya da 0 verecektir
+
 	i = 0;
 	while (i < 8)
 	{
-		if ((128 & a) == 128) // 1000 0000 & ..... -> 1000 0000 case ' i geldiyse karşıda + 1 yap
+		if ((128 & a) == 128)
 			kill(pid, SIGUSR1);
 		else
 			kill(pid, SIGUSR2);
@@ -28,7 +21,7 @@ void	send_signal(int pid)
 
 void	send_string(char *str, int pid)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -41,7 +34,7 @@ void	send_string(char *str, int pid)
 	send_signal(pid);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	int		pid;
 
