@@ -1,14 +1,26 @@
 #ifndef MINITALK_H
-#define MINITALK_H
+# define MINITALK_H
 
-#include <signal.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include "ft_printf/ft_printf.h"
+# include <signal.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include "ft_printf/ft_printf.h"
+# include "libft/libft.h"
 
-#define SIGUSER1 30
-#define SIGUSER2 31 // they are defined in macOS probably, but not here
+# ifndef SIGUSR1
+#  define SIGUSR1 30
+# endif
 
-int	ft_atoi(const char *str);
+# ifndef SIGUSR2
+#  define SIGUSR2 31 // they are defined in macOS probably, but not here
+# endif
+
+typedef struct s_result
+{
+	char	c;
+	int		used;
+}			result;
+// function prototypes here
+
 
 #endif
