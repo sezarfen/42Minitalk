@@ -1,21 +1,21 @@
 #include "minitalk.h"
 
-char	a;
+char	g_char;
 
-void	send_signal(int pid)
+void	send_char(int pid)
 {
 	int	i;
 
 	i = 0;
 	while (i < 8)
 	{
-		if ((128 & a) == 128)
+		if ((128 & g_char) == 128)
 			kill(pid, SIGUSR1);
 		else
 			kill(pid, SIGUSR2);
+		g_char <<= 1;
 		i++;
-		a <<= 1;
-		usleep(30);
+		usleep(50);
 	}
 }
 
@@ -26,12 +26,12 @@ void	send_string(char *str, int pid)
 	i = 0;
 	while (str[i])
 	{
-		a = str[i];
-		send_signal(pid);
+		g_char = str[i];
+		send_char(pid);
 		i++;
 	}
-	a = '\n';
-	send_signal(pid);
+	g_char = '\n';
+	send_char(pid);
 }
 
 int	main(int ac, char **av)
@@ -41,6 +41,7 @@ int	main(int ac, char **av)
 	if (ac == 3)
 	{
 		pid = ft_atoi(av[1]);
+		g_char = 0;
 		send_string(av[2], pid);
 	}
 	else
