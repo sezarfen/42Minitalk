@@ -1,5 +1,3 @@
-# LIBFT KULLANMAK SERBEST, ONUN EKLEMELERINI DE YAPARIZ
-
 SERVER_SRCS = server.c 
 CLIENT_SRCS = client.c
 SERVER_BONUS_SRCS = server_bonus.c 
@@ -31,10 +29,10 @@ $(LIBFT):
 
 bonus: server_bonus client_bonus
 
-server_bonus: $(SERVER_BONUS_OBJS)
+server_bonus: $(SERVER_BONUS_OBJS) $(FT_PRINTF) $(LIBFT)
 	gcc -o server_bonus $(SERVER_BONUS_OBJS) $(FT_PRINTF) $(LIBFT)
 
-client_bonus: $(CLIENT_BONUS_OBJS)
+client_bonus: $(CLIENT_BONUS_OBJS) $(FT_PRINTF) $(LIBFT)
 	gcc -o client_bonus $(CLIENT_BONUS_OBJS) $(FT_PRINTF) $(LIBFT)
 
 clean:
