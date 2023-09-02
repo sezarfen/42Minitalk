@@ -6,6 +6,7 @@ FT_PRINTF = ft_printf/libftprintf.a
 LIBFT = libft/libft.a
 NAME = server_client
 CFLAGS = -Werror -Wall -Wextra
+CC = gcc
 
 SERVER_OBJS = $(SERVER_SRCS:.c=.o)
 CLIENT_OBJS = $(CLIENT_SRCS:.c=.o)
